@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Bootstrap Toast -->
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <title>Career Match Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: 'Segoe UI', sans-serif;
+            padding-top: 60px;
+            animation: fadeIn 2s ease-in;
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            animation: slideUp 1.2s ease-out;
+            background-color: #ffffffd9;
+        }
+
+        h1 {
+            font-weight: 700;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        .value {
+            font-weight: 500;
+            color: #222;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #eee;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    {% if results %}
+        {% for result in results %}
+        <div class="card p-4 mx-auto mt-3" style="max-width: 850px;">
+            <h1 class="text-center text-primary mb-4">🎯 Career Recommendation: {{ result.career }}</h1>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <p><span class="label">📘 Description:</span> <span class="value">{{ result.description }}</span></p>
+                    <p><span class="label">🧠 Skills Required:</span> <span class="value">{{ result.skills }}</span></p>
+                    <p><span class="label">🎓 Educational Path:</span> <span class="value">{{ result.education }}</span></p>
+                    <p><span class="label">💸 Avg Salary in India:</span> <span class="value">{{ result.salary }}</span></p>
+                </div>
+                <div class="col-md-6">
+                    <p><span class="label">👔 Job Roles:</span> <span class="value">{{ result.roles }}</span></p>
+                    <p><span class="label">🏢 Work Style:</span> <span class="value">{{ result.work_style }}</span></p>
+                    <p><span class="label">🧬 Personality Fit:</span> <span class="value">{{ result.personality }}</span></p>
+                    <p><span class="label">📈 Growth Potential:</span> <span class="value">{{ result.growth }}</span></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+<!-- Toast Notification -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+    <div id="resultToast" class="toast align-items-center text-white bg-{{ 'success' if results else 'warning' }} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ 'Career matched successfully!' if results else 'No matching career found, try refining your input.' }}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+  
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-custom btn-lg">🔁 Try Another Input</a>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center fs-5">{{ message }}</div>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-outline-light btn-lg">Try Again</a>
+        </div>
+    {% endif %}
+</div>
+<script>
+    window.onload = function () {
+      var toastEl = document.getElementById('resultToast');
+      var toast = new bootstrap.Toast(toastEl);
+      toast.show();
+    };
+  </script>
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
