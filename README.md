@@ -92,7 +92,3 @@ This project is licensed under the MIT License.
 
 
 ---
-
-## 🙏 Acknowledgement
-
-Thanks to AICTE and Microsoft AINSI Internship for providing the opportunity and guidance to build this project.
