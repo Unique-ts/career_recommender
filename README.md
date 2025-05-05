@@ -89,6 +89,6 @@ This project is licensed under the MIT License.
 
 ## 📝 Note
 
-
+https://github.com/Unique-ts/career_recommender.git
 
 ---
